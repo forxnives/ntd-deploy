@@ -65,6 +65,8 @@ const returnStorage = multer.diskStorage({
 const uploadReturn = multer({ storage : returnStorage  })
 
 const run = async () => {
+
+  console.log(process.env.MONGODB_URI)
   
   await mongoose.connect(process.env.MONGODB_URI, {
     
