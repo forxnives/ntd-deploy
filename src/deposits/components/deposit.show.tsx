@@ -69,7 +69,7 @@ const DisplayDeposit: React.FC<BasePropertyProps> = (props) => {
         async function populateInvoices() {
 
             const invoicesArray =  createObjectsFromParams(record.params, 'invoices')
-            const response = await fetch('http://localhost:3000/invoicecreate', {
+            const response = await fetch(`${window.location.origin}/invoicecreate`, {
 
                 method: 'PUT',
                 headers: {
@@ -87,7 +87,7 @@ const DisplayDeposit: React.FC<BasePropertyProps> = (props) => {
         async function handleExcelCreate () {
 
 
-            const response = await fetch('http://localhost:3000/depositexcel', {
+            const response = await fetch(`${window.location.origin}/depositexcel`, {
     
                 method: 'PUT',
     
@@ -105,7 +105,7 @@ const DisplayDeposit: React.FC<BasePropertyProps> = (props) => {
 
         const handleZipDepositDocs = async () => {
 
-            const response = await fetch('http://localhost:3000/depositdocszip', {
+            const response = await fetch(`${window.location.origin}/depositdocszip`, {
         
                 method: 'PUT',
     
@@ -145,7 +145,7 @@ const DisplayDeposit: React.FC<BasePropertyProps> = (props) => {
 
             setSelectedDate(date)
 
-            const response = await fetch('http://localhost:3000/depositedit/date', {
+            const response = await fetch(`${window.location.origin}/depositedit/date`, {
                 method: 'PUT',
                 headers: {
                   'Content-Type': 'application/json',
@@ -173,7 +173,7 @@ const DisplayDeposit: React.FC<BasePropertyProps> = (props) => {
 
             selectDepositStatus(status)
 
-            const response = await fetch('http://localhost:3000/depositedit/depositstatus', {
+            const response = await fetch(`${window.location.origin}/depositedit/depositstatus`, {
                 method: 'PUT',
                 headers: {
                   'Content-Type': 'application/json',
@@ -375,7 +375,7 @@ const DisplayDeposit: React.FC<BasePropertyProps> = (props) => {
             </Box>
 
     
-            <ExcelDownloadButton onClick={() => handleDateCheck()} marginTop='xxl'  href={`http://localhost:3000/depositdocszip/${record.params._id}`} > Download Files </ExcelDownloadButton>
+            <ExcelDownloadButton onClick={() => handleDateCheck()} marginTop='xxl'  href={`${window.location.origin}/depositdocszip/${record.params._id}`} > Download Files </ExcelDownloadButton>
 
             <Drawer anchor={'bottom'} open={drawerToggle} onClose={() => toggleDrawerToggle(false)}>
 

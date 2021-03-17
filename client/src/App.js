@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -13,30 +12,16 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
-
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
-import AssignmentIcon from '@material-ui/icons/Assignment';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import NotesIcon from '@material-ui/icons/Notes';
-
-import Chart from './DashCell';
-import Deposits from './Deposits';
-import Orders from './Orders';
 import NewOrder from './NewOrder';
 import ViewOrders from './ViewOrders';
 import ViewInvoices from './ViewInvoices';
@@ -50,26 +35,22 @@ import {
   Route,
   Redirect,
   Link as LinkRoute,
-  withRouter 
 } from "react-router-dom";
+
 
 function Copyright() {
   return (
-    // <Typography style={{position: 'absolute', bottom: 3 + 'px', right: 3 + 'px'}} variant="body2" color="textSecondary" align="center">
+    
     <Typography style={{
-      
-      position: 'absolute', 
 
+      position: 'absolute', 
       marginLeft: 'auto',
       marginRight: 'auto',
       left: 0,
       right: 0,
-      
       textAlign: 'center',
       bottom: 3 + 'px'
-    
-    
-    
+   
     }} variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <a color="inherit" href="https://www.ntdingredientes.com.jm/">
@@ -84,6 +65,7 @@ function Copyright() {
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
+  
   root: {
     display: 'flex',
   },
@@ -181,8 +163,6 @@ function App(props) {
   const [user, setUser] = useState(undefined);
 
 
-
-
   const getUser = useCallback(async function() {
     try {
       const response = await fetch("/customer/me");
@@ -203,17 +183,12 @@ function App(props) {
   }, [getUser]);
 
 
-
-  
-
-
-
   useEffect(()=>{
         
     const retrieveOrders = async (e) => {
 
         try {
-            const response = await fetch('http://localhost:3000/ordersretrieve', {
+            const response = await fetch(`${window.location.origin}/ordersretrieve`, {
                 method: 'PUT',
                 headers: {
                   'Content-Type': 'application/json',
@@ -227,14 +202,10 @@ function App(props) {
             }
 
             const data = await response.json()
-
-
-
             setOrdersArray(data.data)
           
         } catch(err) {
             setError(err.message);
-
         }
     }
 
@@ -243,7 +214,8 @@ function App(props) {
 
       try {
 
-            const response = await fetch('http://localhost:3000/invoicesretrieve', {
+            const response = await fetch(`${window.location.origin}/invoicesretrieve`, {
+
                 method: 'PUT',
                 headers: {
                   'Content-Type': 'application/json',
@@ -257,10 +229,7 @@ function App(props) {
             }
 
             const data = await response.json()
-
-            
             setInvoicesArray(data.data)
-
 
       }catch (err) {
         setError(err.message)
@@ -268,12 +237,10 @@ function App(props) {
       }
     }
 
-
     retrieveOrders()
     retrieveInvoices()
 
 },[update])
-
 
 useEffect(() => {
 
@@ -286,9 +253,6 @@ useEffect(() => {
 
 
 },[ordersArray, invoicesArray])
-
-
-
 
   const handleLogOut = () => {
     setUser(null)
@@ -303,8 +267,6 @@ useEffect(() => {
   };
   
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
-
 
   return (
 
@@ -323,17 +285,13 @@ useEffect(() => {
               }
 
               return <Login getUser={getUser} {...props} />;
-              // return <Login setUser={setUser} {...props} />;
+              
             }}
     />
 
-
-
     <Route path="/app" >
 
-
     <div className={classes.root}>
-
       
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
@@ -358,9 +316,6 @@ useEffect(() => {
           </IconButton>
         </Toolbar>
       </AppBar>
-
-
-
 
             <Drawer
             variant="permanent"
@@ -439,7 +394,6 @@ useEffect(() => {
             
           </Drawer>
 
-
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
 
@@ -447,33 +401,19 @@ useEffect(() => {
 
         <Switch>
 
-
-
-
-
-
-
-
           <Route path="/app/dashboard">
 
-
             <Dashboard ordersArray={ordersArray} invoicesArray={invoicesArray} userName={ user && (user.userName)}  />
-
 
           </Route>
           <Route path="/app/neworder">
             <div style={{width: 100 +'%', textAlign: 'center'}}><h1 style={{marginBottom: 3+'vh'}}>New Order</h1></div>
 
-            {/* <button onClick={() => handleTest('PENDING')} >TEST BUTTON</button> */}
-
             <NewOrder user={user && (user)}  invoicesArray={invoicesArray} updateValue={update} update={forceUpdate} />  
-
 
           </Route>
           <Route path="/app/vieworders">
           <div style={{width: 100 +'%', textAlign: 'center'}}><h1 style={{marginBottom: 3+'vh'}}>View Orders</h1></div>
-
-
 
             <ViewOrders updateValue={update} update={forceUpdate} ordersArray={ordersArray}  />
           </Route>
@@ -494,19 +434,9 @@ useEffect(() => {
 
       </main>
 
-
     </div>
 
-
-
-
-
     </Route >
-
-
-
-
-
 
     </Switch >
     </Router>

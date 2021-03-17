@@ -25,7 +25,7 @@ const BulkCreateDeposit: React.FC<BasePropertyProps> = (props) => {
             }
 
 
-            const response = await fetch('http://localhost:3000/depositadd', {
+            const response = await fetch(`${window.location.origin}/depositadd`, {
 
                 method: 'POST',
                 headers: {

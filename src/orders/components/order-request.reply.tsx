@@ -102,7 +102,7 @@ const DisplayInvoice: React.FC<BasePropertyProps> = (props) => {
             const price = document.querySelector('#totalpriceinput');
 
 
-            const response = await fetch('http://localhost:3000/orderreply', {
+            const response = await fetch(`${window.location.origin}/orderreply`, {
 
                 method: 'POST',
                 headers: {
@@ -137,7 +137,7 @@ const DisplayInvoice: React.FC<BasePropertyProps> = (props) => {
             const totalPrice = props.record.params.replyTotalPrice
 
         
-            const response = await fetch('http://localhost:3000/invoicecreate', {
+            const response = await fetch(`${window.location.origin}/invoicecreate`, {
 
                 method: 'POST',
                 headers: {

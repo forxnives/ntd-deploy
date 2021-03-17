@@ -71,7 +71,7 @@ const InvoiceShow: React.FC<BasePropertyProps> = (props) => {
 
     const handleDepositRemove = async () => {
 
-        const response = await fetch('http://localhost:3000/depositremove/', {
+        const response = await fetch(`${window.location.origin}/depositremove/`, {
 
             method: 'PUT',
             headers: {

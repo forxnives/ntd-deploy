@@ -77,7 +77,7 @@ const useRowStyles = makeStyles({
 
 
         try {
-            const response = await fetch('http://localhost:3000/requestinvoice', {
+            const response = await fetch(`${window.location.origin}/requestinvoice`, {
 
                 method: 'PUT',
                 headers: {

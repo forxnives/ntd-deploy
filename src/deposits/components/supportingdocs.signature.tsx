@@ -46,7 +46,7 @@ const SignatureSupportingDocs: React.FC<BasePropertyProps> = ({drillProps, toggl
   
             formData.append("data", file)
   
-            const response = await fetch(`http://localhost:3000/depositdocupload/${docType}`, {
+            const response = await fetch(`${window.location.origin}/depositdocupload/${docType}`, {
   
                 method: 'POST',
                 body: formData,
@@ -77,7 +77,7 @@ const SignatureSupportingDocs: React.FC<BasePropertyProps> = ({drillProps, toggl
     const handleDelete = async (typeToDelete) => {
 
         try {
-            const response = await fetch(`http://localhost:3000/delete/${typeToDelete}`, {
+            const response = await fetch(`${window.location.origin}/delete/${typeToDelete}`, {
 
                 method: 'PUT',
                 headers: {
@@ -121,7 +121,7 @@ const SignatureSupportingDocs: React.FC<BasePropertyProps> = ({drillProps, toggl
             <DropZoneItem  filename={`${record.params["supportingDocs.signature.signatureDocName"]}`}/>
 
             <Box  flex justifyContent='center'>
-                <ReturnDownloadButton onClick={() => toggleDrawer(false)} margin='lg' href={`http://localhost:3000/download/signature/${record.params._id}/${record.params["supportingDocs.signature.signatureDocPath"]}/${record.params["supportingDocs.signature.signatureDocName"]}`}> Download </ReturnDownloadButton>
+                <ReturnDownloadButton onClick={() => toggleDrawer(false)} margin='lg' href={`${window.location.origin}/download/signature/${record.params._id}/${record.params["supportingDocs.signature.signatureDocPath"]}/${record.params["supportingDocs.signature.signatureDocName"]}`}> Download </ReturnDownloadButton>
                 <Button onClick={() => handleDelete('SIGNATURE')} margin='lg' variant='danger'> Delete </Button>
             </Box>
 

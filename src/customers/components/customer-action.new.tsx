@@ -66,20 +66,6 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
 
             console.log(window.location.origin)
 
-
-
-
-
-
-            // const nodeList = document.querySelectorAll('.orderrow')
-
-            // const ordersArray = [...nodeList].map(node => {
-
-            //      const inputNodes = node.querySelectorAll('input')
-            //      return {quantity: inputNodes[0].value, packing: inputNodes[1].value, item: inputNodes[2].value}
-            // })
-
-
             const response = await fetch(`${window.location.origin}/customer/create`, {
 
                 method: 'POST',
@@ -119,16 +105,6 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
         }
 
     }
-
-
-
-
-
-
-
-
-
-
 
 
     return (
@@ -195,10 +171,6 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
                 </Grid>
 
 
-
-
-
-
                 <Grid style={{width: 100 + '%'}} item>
 
                     <Box marginBottom='16px'>
@@ -229,7 +201,6 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
                     <Button size='lg' variant='primary' type='submit'>Save</Button>
 
                 </div>
-
 
                 </form>
 

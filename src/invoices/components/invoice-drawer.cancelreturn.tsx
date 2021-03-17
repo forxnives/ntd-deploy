@@ -99,7 +99,7 @@ const InvoiceCancelReturnDrawer: React.FC<BasePropertyProps> = ({drillProps, tog
 
           formData.append("data", file)
 
-          const response = await fetch(`http://localhost:3000/invoicedocupload/${docType}`, {
+          const response = await fetch(`${window.location.origin}/invoicedocupload/${docType}`, {
 
               method: 'POST',
               body: formData,
@@ -141,7 +141,7 @@ const InvoiceCancelReturnDrawer: React.FC<BasePropertyProps> = ({drillProps, tog
     const handleDelete = async (typeToDelete) => {
 
         try {
-            const response = await fetch(`http://localhost:3000/delete/${typeToDelete}`, {
+            const response = await fetch(`${window.location.origin}/delete/${typeToDelete}`, {
 
                 method: 'PUT',
                 headers: {
@@ -197,7 +197,7 @@ const InvoiceCancelReturnDrawer: React.FC<BasePropertyProps> = ({drillProps, tog
                         <DropZoneItem  filename={`${record.params["returned.returnDocName"]}`}/>
 
                         <Box  flex justifyContent='center'>
-                            <ReturnDownloadButton onClick={() => toggleDrawer(false)} margin='lg' href={`http://localhost:3000/download/return/${record.params._id}/${record.params["returned.returnDocPath"]}/${record.params["returned.returnDocName"]}`}> Download </ReturnDownloadButton>
+                            <ReturnDownloadButton onClick={() => toggleDrawer(false)} margin='lg' href={`${window.location.origin}/download/return/${record.params._id}/${record.params["returned.returnDocPath"]}/${record.params["returned.returnDocName"]}`}> Download </ReturnDownloadButton>
                             <Button onClick={() => handleDelete('RETURN')} margin='lg' variant='danger'> Delete </Button>
                         </Box>
                     </Box>
@@ -226,7 +226,7 @@ const InvoiceCancelReturnDrawer: React.FC<BasePropertyProps> = ({drillProps, tog
                         <DropZoneItem  filename={`${record.params["cancelled.cancelDocName"]}`}/>
 
                         <Box  flex justifyContent='center'>
-                            <ReturnDownloadButton onClick={() => toggleDrawer(false)} margin='lg' href={`http://localhost:3000/download/cancel/${record.params._id}/${record.params["cancelled.cancelDocPath"]}/${record.params["cancelled.cancelDocName"]}`}> Download </ReturnDownloadButton>
+                            <ReturnDownloadButton onClick={() => toggleDrawer(false)} margin='lg' href={`${window.location.origin}/download/cancel/${record.params._id}/${record.params["cancelled.cancelDocPath"]}/${record.params["cancelled.cancelDocName"]}`}> Download </ReturnDownloadButton>
                             <Button onClick={() => handleDelete('CANCEL')} margin='lg' variant='danger'> Delete </Button>
                         </Box>
 

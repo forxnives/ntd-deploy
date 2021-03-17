@@ -32,7 +32,7 @@ const BankRecieptSupportingDocs: React.FC<BasePropertyProps> = ({drillProps, tog
   
             formData.append("data", file)
   
-            const response = await fetch(`http://localhost:3000/depositdocupload/${docType}`, {
+            const response = await fetch(`${window.location.origin}/depositdocupload/${docType}`, {
   
                 method: 'POST',
                 body: formData,
@@ -63,7 +63,7 @@ const BankRecieptSupportingDocs: React.FC<BasePropertyProps> = ({drillProps, tog
     const handleDelete = async (typeToDelete) => {
 
         try {
-            const response = await fetch(`http://localhost:3000/delete/${typeToDelete}`, {
+            const response = await fetch(`${window.location.origin}/delete/${typeToDelete}`, {
 
                 method: 'PUT',
                 headers: {
@@ -108,7 +108,7 @@ const BankRecieptSupportingDocs: React.FC<BasePropertyProps> = ({drillProps, tog
 
             <Box  flex justifyContent='center'>
 
-                <ReturnDownloadButton onClick={() => toggleDrawer(false)} margin='lg' href={`http://localhost:3000/download/bankreciept/${record.params._id}/${record.params["supportingDocs.bankReciept.bankRecieptDocPath"]}/${record.params["supportingDocs.bankReciept.bankRecieptDocName"]}`}> Download </ReturnDownloadButton>
+                <ReturnDownloadButton onClick={() => toggleDrawer(false)} margin='lg' href={`${window.location.origin}/download/bankreciept/${record.params._id}/${record.params["supportingDocs.bankReciept.bankRecieptDocPath"]}/${record.params["supportingDocs.bankReciept.bankRecieptDocName"]}`}> Download </ReturnDownloadButton>
                 <Button onClick={() => handleDelete('BANKRECIEPT')} margin='lg' variant='danger'> Delete </Button>
 
             </Box>

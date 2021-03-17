@@ -100,7 +100,7 @@ const PaymentDetailsDrawer: React.FC<BasePropertyProps> = ({drillProps, toggleDr
             formData.append("chequeNumber", chequeNumber )
           }
 
-          const response = await fetch(`http://localhost:3000/invoicedocupload/${docType}`, {
+          const response = await fetch(`${window.location.origin}/invoicedocupload/${docType}`, {
 
               method: 'POST',
               body: formData,
@@ -137,7 +137,7 @@ const PaymentDetailsDrawer: React.FC<BasePropertyProps> = ({drillProps, toggleDr
 
 
         try {
-            const response = await fetch(`http://localhost:3000/delete/${typeToDelete}`, {
+            const response = await fetch(`${window.location.origin}/delete/${typeToDelete}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -200,7 +200,7 @@ const PaymentDetailsDrawer: React.FC<BasePropertyProps> = ({drillProps, toggleDr
                             <ReturnDownloadButton 
                                 onClick={() => toggleDrawer(false)} 
                                 margin='lg' 
-                                href={`http://localhost:3000/download/cheque/${record.params._id}/${record.params["paymentDoc.paymentDocPath"]}/${record.params["paymentDoc.paymentDocName"]}`}> 
+                                href={`${window.location.origin}/download/cheque/${record.params._id}/${record.params["paymentDoc.paymentDocPath"]}/${record.params["paymentDoc.paymentDocName"]}`}> 
                                 Download 
                             </ReturnDownloadButton>
                             <Button onClick={() => handleDelete('CHEQUE')} margin='lg' variant='danger'> Delete </Button>
@@ -239,7 +239,7 @@ const PaymentDetailsDrawer: React.FC<BasePropertyProps> = ({drillProps, toggleDr
                             <ReturnDownloadButton 
                                 onClick={() => toggleDrawer(false)} 
                                 margin='lg' 
-                                href={`http://localhost:3000/download/transfer/${record.params._id}/${record.params["paymentDoc.paymentDocPath"]}/${record.params["paymentDoc.paymentDocName"]}`}>
+                                href={`${window.location.origin}/download/transfer/${record.params._id}/${record.params["paymentDoc.paymentDocPath"]}/${record.params["paymentDoc.paymentDocName"]}`}>
                                 Download 
                             </ReturnDownloadButton>
 
@@ -279,7 +279,7 @@ const PaymentDetailsDrawer: React.FC<BasePropertyProps> = ({drillProps, toggleDr
                             <ReturnDownloadButton 
                                 onClick={() => toggleDrawer(false)} 
                                 margin='lg' 
-                                href={`http://localhost:3000/download/deposit/${record.params._id}/${record.params["paymentDoc.paymentDocPath"]}/${record.params["paymentDoc.paymentDocName"]}`}>
+                                href={`${window.location.origin}/download/deposit/${record.params._id}/${record.params["paymentDoc.paymentDocPath"]}/${record.params["paymentDoc.paymentDocName"]}`}>
                                 Download 
                             </ReturnDownloadButton>
 

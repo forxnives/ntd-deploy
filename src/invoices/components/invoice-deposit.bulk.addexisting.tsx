@@ -29,21 +29,18 @@ const BulkAddToDeposit: React.FC<BasePropertyProps> = (props) => {
 
 
     const { records } = props;
-
     const [ fetchedDeposits, setFetchedDeposits ] = useState([]);
     const [ selectedDeposit, setSelectedDeposit ] = useState({});
-
     const classes = useStyles();
 
 
     useEffect(() => {
+
         async function depositsFetch () {
-            const response = await fetch('http://localhost:3000/depositadd');
+            const response = await fetch(`${window.location.origin}/depositadd`);
             const data = await response.json();
 
-            
             setFetchedDeposits(data.data);
-
             setSelectedDeposit(data.data[0]._id);
         }
 
@@ -66,7 +63,7 @@ const BulkAddToDeposit: React.FC<BasePropertyProps> = (props) => {
             }
 
 
-            const response = await fetch('http://localhost:3000/depositadd', {
+            const response = await fetch(`${window.location.origin}/depositadd`, {
 
                 method: 'PUT',
                 headers: {
@@ -84,19 +81,13 @@ const BulkAddToDeposit: React.FC<BasePropertyProps> = (props) => {
                             invoiceId: record.params._id,
                             invoiceNumber: record.params.number
 
-                        
-                        })),    
-
+                        })),
                     }
-
                 }),
-
             });
 
             const data = await response.json();
 
-
-            
             props.history.push('/admin/resources/Invoice');
 
         } catch (err){

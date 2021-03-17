@@ -71,7 +71,7 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
             
 
             
-            const response = await fetch('http://localhost:3000/invoicecreate', {
+            const response = await fetch(`${window.location.origin}/invoicecreate`, {
 
                 method: 'POST',
                 headers: {

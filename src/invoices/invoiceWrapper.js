@@ -198,7 +198,7 @@ const options = {
                     type: 'success',
                   },
                   // redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
-                  redirectUrl: 'http://localhost:3000/admin',
+                  redirectUrl: `${window.location.origin}/admin`,
                 }
               }
               throw new Error('method should be either "post" or "get"')
@@ -236,7 +236,7 @@ const options = {
                   type: 'success',
                 },
                 // redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
-                redirectUrl: 'http://localhost:3000/admin',
+                redirectUrl: `${window.location.origin}/admin`,
               }
             }
             throw new Error('method should be either "post" or "get"')

@@ -83,10 +83,10 @@ const run = async () => {
 
   app.use(express.json());
 
-  app.use(cors({
-    origin : "http://localhost:3006",
-    credentials: true,
-  }))
+  // app.use(cors({
+  //   origin : "http://localhost:3006",
+  //   credentials: true,
+  // }))
 
   app.use(cookieParser());
 
@@ -162,7 +162,7 @@ const run = async () => {
 
   app.listen(port, () => {
 
-      console.log(`listening at http://localhost:${port}`)
+      console.log(`server running and listening at port`)
   })
 }
 

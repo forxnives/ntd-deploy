@@ -55,9 +55,6 @@ const NewOrder = ({history, update, updateValue, invoicesArray, user}) => {
 
 
 
-
-
-
     const handleOrderCreateSubmit = async (e) => {
 
         try {
@@ -82,7 +79,7 @@ const NewOrder = ({history, update, updateValue, invoicesArray, user}) => {
 
 
 
-            const response = await fetch('http://localhost:3000/ordercreate', {
+            const response = await fetch(`${window.location.origin}/ordercreate`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
