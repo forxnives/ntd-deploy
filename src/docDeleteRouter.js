@@ -35,11 +35,6 @@ router.route('/:typeToDelete')
 
   }
 
-
-
-
-
-
   if (typeToDelete === 'SIGNATURE' ){
 
     const data = deleteDepositDocUpdateRecord(req.body.payload["supportingDocs.signature.signatureDocPath"], req.body.payload._id, req.body.payload["supportingDocs.signature.signatureDocName"], 'signature' )
@@ -56,12 +51,6 @@ router.route('/:typeToDelete')
 
   }
 
-
-
-  
-
 })
-
-
 
   module.exports = router;

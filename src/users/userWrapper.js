@@ -1,11 +1,7 @@
 const AdminBro = require('admin-bro');
-
 const { passwordBefore, passwordAfter } = require('./actions/password.hook');
 const { uploadImageBefore, uploadImageAfter } = require('./actions/upload-image.hook');
-
-const { User, userSchema } = require('./userModel');
-
-
+const { User } = require('./userModel');
 
 const canModifyUsers = ({ currentAdmin }) => currentAdmin && currentAdmin.userType === 'ADMIN';
 
@@ -76,19 +72,14 @@ const options = {
         delete:{
             isAccessible: canModifyUsers,
         },
-        // show: {
-        //     isVisible: false,
-        // }
 
         bulkDelete: {
             isAccessible: canModifyUsers,
         }
-
         
     },
 
     parent: null
-
 
 }
 

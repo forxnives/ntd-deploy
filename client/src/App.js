@@ -175,7 +175,7 @@ function App(props) {
       setUser(json.data);
     } catch(e) {
       setUser(undefined);
-      console.log(e);
+      
     }
   }, [])
   useEffect(() => {

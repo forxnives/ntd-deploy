@@ -1,17 +1,5 @@
 const path = require('path');
-// const fs = require('fs');
-const AdminBro = require('admin-bro');
-
-// const {
-//     promises: fsPromises,
-//     constants: {
-//       COPYFILE_EXCL
-//     }
-//   } = require('fs');
-
 const fs = require ('fs')
-
-
 
 
 const uploadImageAfter = async (response, request, context) => {
@@ -23,9 +11,6 @@ const uploadImageAfter = async (response, request, context) => {
 
         const filePath = path.join('uploads', record.id().toString(), uploadImage.name);
         await fs.promises.mkdir(path.dirname(filePath), {recursive: true});
-
-
-        // await fsPromises.rename(uploadImage.path, filePath);
 
         const is = fs.createReadStream(uploadImage.path);
         const os = fs.createWriteStream(filePath);

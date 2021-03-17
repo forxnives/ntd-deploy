@@ -1,11 +1,9 @@
 import React from 'react';
-
 import { Box } from '@admin-bro/design-system';
 import { BasePropertyProps } from 'admin-bro';
 
 
 const List: React.FC<BasePropertyProps> = (props) => {
-
 
     const { record } = props;
 

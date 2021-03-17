@@ -1,8 +1,4 @@
-    
-    
-    import { TableRow, TableCell } from '@admin-bro/design-system';
-    
-    
+       
     //turns flattened record.params requests back into array of objects
 
     export const createObjectsFromParams = (params, keyParam) => {
@@ -24,16 +20,14 @@
 
     }
 
+    
     export const priceFormat = price => {
     
         if (price) {
             return price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
         }else {
             return '$0.00'
-        }
-
-        
-        
+        }  
     
     };
 

@@ -8,15 +8,11 @@ const Edit: React.FC<BasePropertyProps> = (props) => {
 
     const { property, onChange, record } = props;
 
-
     const handleDropZoneChange: DropZoneProps['onChange'] = (files) => {
         onChange(property.name, files[0]);
     }
 
     const uploadedPhoto = record.params.displayPicPath;
-    
-    // const photoToUpload = record.params[property.name];
-    
 
 
     return (

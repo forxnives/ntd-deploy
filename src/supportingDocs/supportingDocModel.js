@@ -19,9 +19,6 @@ const supportingDocModel = new Schema({
 })
 
 
-
-
-
 const SupportingDoc = mongoose.model('SupportingDoc', supportingDocModel);
 
     

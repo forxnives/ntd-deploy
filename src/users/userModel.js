@@ -2,9 +2,6 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-//need to add authentication and authorization
-
-
 const userSchema = new Schema({
 
     userType: {
@@ -32,8 +29,6 @@ const userSchema = new Schema({
     displayPicPath: String   //path to display pic file
 
 });
-
-
 
 const User = mongoose.model('User', userSchema);
 

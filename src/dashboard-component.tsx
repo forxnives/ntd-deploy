@@ -1,6 +1,5 @@
-// import { useState, useEffect } from 'React';
 import { ApiClient } from 'admin-bro'
-import { Box, Link, LinkProps, Icon, IconProps } from '@admin-bro/design-system'
+import { Box, Link, Icon } from '@admin-bro/design-system'
 
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -15,14 +14,8 @@ const Dashboard = () => {
 
   React.useEffect(() => {
 
-
-    // api.getDashboard().then((response) => {
-    //   setData(response.data)
-    // })
-
     api.resourceAction({ resourceId: 'Invoice', actionName: 'list' }).then(results => {
-        // setData(results)
-        
+                
         const invoicesInfo = results.data.records.reduce((accumulator, record) => {
 
             let recordTotal = 0
@@ -40,8 +33,6 @@ const Dashboard = () => {
                 accumulator.outstanding = accumulator.outstanding + recordTotal 
             }
 
-
-
             return accumulator
 
         }, {total: 0, outstanding: 0})
@@ -51,35 +42,12 @@ const Dashboard = () => {
         setInvoiceinfo({total, outstanding})
     })
 
-
-
   }, [])
 
 
   return (
 
-
-
-    // <Box variant="grey">
-
-    //     <Box margin='lg' padding='sm' variant="white">
-    //         <img style={{width: 100 + '%'}} src={'http://www.ntdingredientes.com.jm/wp-content/uploads/2020/01/Header-Productos-1920x600-V2.jpg'} ></img>
-    //     </Box>
-
-    //     <Box margin='lg' bg="primary20" p="md" width={1/2} variant="white">
-    //         {invoiceInfo.total}
-    //     </Box>
-
-    //     <Box margin='lg' bg="primary20" p="md" width={1/2} variant="white">
-    //         {invoiceInfo.outstanding}
-    //     </Box>
-
-    // </Box>
-
-
     <Container maxWidth="lg">
-
-
 
         <Grid container spacing={2}>
 
@@ -89,8 +57,6 @@ const Dashboard = () => {
                 <Typography component="h2" variant="h6" color="primary" gutterBottom>
                     Total Invoices
                 </Typography>
-
-
 
                 <Typography component="p" variant="h4">
                     {invoiceInfo.total}
@@ -108,8 +74,6 @@ const Dashboard = () => {
                     <Typography component="h2" variant="h6" color="primary" gutterBottom>
                         Total Outstanding
                     </Typography>
-
-
 
                     <Typography component="p" variant="h4">
                         {invoiceInfo.outstanding}
@@ -131,14 +95,7 @@ const Dashboard = () => {
             <Link href={'/admin/resources/Order'}>
                 <Box flex alignItems='center' margin='lg' bg="primary20" p="md" variant="white">
 
-
-
                         <Icon size={32} icon="RequestQuote" />
-
-
-
-
-
 
                         <div style={{width: 100 + '%', textAlign: 'center'}} >Orders</div>
 
@@ -149,7 +106,6 @@ const Dashboard = () => {
             <Grid item xs={12} md={4} lg={4}>
             <Link href={'/admin/resources/Invoice'}>
                 <Box flex alignItems='center' margin='lg' bg="primary20" p="md" variant="white">
-
 
                     <Icon size={32} icon="ListChecked" />
                     <div style={{width: 100 + '%', textAlign: 'center'}} >Invoices</div>
@@ -167,7 +123,6 @@ const Dashboard = () => {
 
                     <div style={{width: 100 + '%', textAlign: 'center'}} >Deposits</div>
 
-
                 </Box>
                 </Link>
             </Grid>
@@ -175,8 +130,6 @@ const Dashboard = () => {
         </Grid>
 
     </Container>
-
-
 
   )
 }
