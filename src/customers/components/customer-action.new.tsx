@@ -64,6 +64,9 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
             }
 
 
+            console.log(window.location.origin)
+
+
 
 
 
@@ -77,7 +80,7 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
             // })
 
 
-            const response = await fetch('http://localhost:3000/customer/create', {
+            const response = await fetch(`${window.location.origin}/customer/create`, {
 
                 method: 'POST',
                 headers: {
