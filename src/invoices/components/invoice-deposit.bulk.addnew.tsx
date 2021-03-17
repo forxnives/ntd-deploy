@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Box, Button, ButtonCSS  } from '@admin-bro/design-system';
 import { BasePropertyProps } from 'admin-bro';
 import { withRouter } from 'react-router-dom';
@@ -24,20 +23,16 @@ const BulkCreateDeposit: React.FC<BasePropertyProps> = (props) => {
                 throw new Error('no paid invoices being added')
             }
 
-
             const response = await fetch(`${window.location.origin}/depositadd`, {
 
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
                 },
+
                 body: JSON.stringify({
 
-                    // orderId: record.params._id,
-
                     payload: {
-
-                        // submissionDate: Date,
                     
                         status: 'PENDING',
 
@@ -46,25 +41,17 @@ const BulkCreateDeposit: React.FC<BasePropertyProps> = (props) => {
                             invoiceNumber: record.params.number
                         
                         })),    
-
                     }
-
                 }),
-
             });
 
-            const data = await response.json();
-
-            console.log(data)
-            
+            const data = await response.json();            
             props.history.push('/admin/resources/Invoice');
 
         } catch (err){
             alert(err.message)
         }
 
-
-        // console.log(records.map(record => (record.params._id)))
     }
 
 
@@ -86,8 +73,7 @@ const BulkCreateDeposit: React.FC<BasePropertyProps> = (props) => {
 
         <Box marginBottom='xxl'>
             <h1> Would you like to add invoice{records.length === 1 ? (' ') : ('s ') } {invoiceNumbers} to a new deposit ? </h1>
-            {/* <ButtonLikeComponent href="/admin/resources/Invoice/actions/new">Create</ButtonLikeComponent> */}
-
+            
             <Button marginTop='lg' onClick={()=> handleDepositCreate()}>Create Deposit</Button>
 
         </Box>

@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link as LinkRoute } from 'react-router-dom';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -58,14 +58,13 @@ export default function SignInSide(props) {
 
     try {
       const response = await fetch('/customer/login', {
-        // const response = await fetch('/api/users/login', {
-
+        
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ email, password }),
-        // body: JSON.stringify({ email: email, password: password }),
+        
       })
       const data = await response.json();
 

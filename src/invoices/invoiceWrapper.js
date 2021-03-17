@@ -1,12 +1,7 @@
 const AdminBro = require('admin-bro');
-const { Invoice, invoiceSchema } = require('./invoiceModel');
+const { Invoice } = require('./invoiceModel');
 const uploadFeature = require('@admin-bro/upload')
-const { uploadImageBefore, uploadImageAfter } = require('./actions/upload-cancelreturn.hook.js');
 const { deleteInvoiceAfter } = require('./actions/delete-invoice.hook.js')
-
-
-
-
 
 
 const canModifyOrders = ({ currentAdmin }) => currentAdmin && currentAdmin.userType === 'ADMIN';
@@ -14,7 +9,6 @@ const canModifyOrders = ({ currentAdmin }) => currentAdmin && currentAdmin.userT
 const options = {
 
   listProperties: ['number', 'customer','status'],
-
 
     properties: {
 
@@ -39,7 +33,6 @@ const options = {
           },
 
           components: {
-
             list: AdminBro.bundle('./components/invoice-list.customer.display.tsx'),
 
           }
@@ -61,7 +54,7 @@ const options = {
         
         price: {
           components: {
-            // list: AdminBro.bundle('./components/invoice-list.price.display.tsx'),
+            
             show: AdminBro.bundle('./components/invoice.show.tsx')
           }
         },
@@ -163,12 +156,9 @@ const options = {
 
     actions: {
 
-
       new: {
         component: AdminBro.bundle('./components/invoice-action.new.tsx'),
       },
-
-
 
         AddToExistingDeposit: {
             actionType: 'bulk',
@@ -197,7 +187,7 @@ const options = {
                     }),
                     type: 'success',
                   },
-                  // redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
+                  
                   redirectUrl: `${window.location.origin}/admin`,
                 }
               }
@@ -235,12 +225,11 @@ const options = {
                   }),
                   type: 'success',
                 },
-                // redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
+                
                 redirectUrl: `${window.location.origin}/admin`,
               }
             }
             throw new Error('method should be either "post" or "get"')
-
 
           },
           component: AdminBro.bundle('./components/invoice-deposit.bulk.addnew.tsx'),
@@ -253,19 +242,17 @@ const options = {
           after: async (response, request, context) => {
 
             return deleteInvoiceAfter(response, request, context)
-            // console.log(context)
+            
           }
       },
         
     },
 
 
-    // parent: null
-
 }
 
 const features = [
-  // passwordFeature(/** **/),
+  
   uploadFeature({
     provider: { local: { bucket: 'uploads'}},
     properties: {

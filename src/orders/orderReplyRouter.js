@@ -10,7 +10,6 @@ router.route('/')
 
         const newOrder = await replyToOrder(body.orderId, body);
 
-
       res.json({ data:  newOrder });
     } catch(err) {
       console.log(err);

@@ -1,17 +1,11 @@
 const AdminBro = require('admin-bro');
 const { deleteOrderAfter } = require('./actions/delete-order.hook.js')
-
-
-
-const { Order, orderSchema } = require('./orderModel');
-
-
+const { Order } = require('./orderModel');
 
 const canModifyOrders = ({ currentAdmin }) => currentAdmin && currentAdmin.userType === 'ADMIN';
 
 
 const options = {
-
 
     listProperties: ['customer', 'date','invoiceStatus'],
 
@@ -22,25 +16,21 @@ const options = {
             isVisible: false
         },
 
-
-
         customer: {
+
             isVisible: {
-                // list: false,
-                filter: true,
-                
+                filter: true,    
             },
+
             components: {
                 list: AdminBro.bundle('./components/order-customer-list-display.tsx')
             }
-
-
         },
 
 
         customerCode: {
             isVisible: {
-                // list: false,
+
                 filter: true
             }
         },
@@ -57,13 +47,10 @@ const options = {
             }
         },
 
-
         requests: {
 
-            // isArray: true,
             components: {
                 show: AdminBro.bundle('./components/order-requests.show.tsx'),
-                // list: AdminBro.bundle('../test-component.tsx')
             }
 
         },
@@ -88,9 +75,6 @@ const options = {
             isVisible: false
         },
 
-
-
-
         reply: {
 
             isVisible: {
@@ -100,15 +84,12 @@ const options = {
                 edit: false
             },
 
-
             components: {
                 edit: AdminBro.bundle('./components/order-invoice.create.tsx'),
                 show: AdminBro.bundle('./components/order-request.reply.tsx')
 
             },
-
         }
-
     },
 
     actions: {
@@ -135,16 +116,9 @@ const options = {
             isAccessible: canModifyOrders,
         },
 
-
-
-        
     },
-
     parent: null
-
 }
-
-
 
 
 module.exports = {

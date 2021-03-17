@@ -1,10 +1,8 @@
 const {Invoice}  = require('./invoiceModel');
 const {Order}  = require('../orders/orderModel');
 const { Customer } = require('../customers/customerModel');
-const { ArchiveOrder } = require('../orders/orderArchiveModel')
 const fs = require('fs');
 const rimraf = require("rimraf");
-
 
 
 exports.createInvoiceFromOrder = async (orderId, data) => {
@@ -23,7 +21,6 @@ exports.createInvoiceFromOrder = async (orderId, data) => {
         }
 
         const newInvoice = new Invoice({...data, orderItems: order.requests, customerId: order.customerId });
-
 
         const invoice = await newInvoice.save();
 
@@ -44,15 +41,6 @@ exports.createInvoiceFromOrder = async (orderId, data) => {
             console.log("Successful deletion");
           });
     
-        
-
-
-
-
-
-
-
-
         return invoice;
 
     }catch (err){
@@ -64,7 +52,6 @@ exports.createInvoiceFromOrder = async (orderId, data) => {
 exports.createNewInvoice = async (data) => {
     try {
 
-
         const existingInvoiceNumbers = await Invoice.find({number: data.number})
         
         if (existingInvoiceNumbers.length) {
@@ -74,10 +61,7 @@ exports.createNewInvoice = async (data) => {
 
         const newInvoice = new Invoice({...data});
         const savedInvoice = await newInvoice.save();
-
-
         return savedInvoice;
-
 
     }catch (err){
         throw err
@@ -115,7 +99,6 @@ exports.addDocToInvoiceRecord = async (file, recParams, documentType, returnAmou
         const pathNumber = pathSplitArray[pathSplitArray.length-1];
 
         
-
         if (documentType === 'RETURN') {
 
             invoice.returned.returnDocPath = pathNumber
@@ -127,8 +110,6 @@ exports.addDocToInvoiceRecord = async (file, recParams, documentType, returnAmou
                 
                 throw new Error('Write Failure')
             }
-
-
 
         };
 
@@ -143,9 +124,6 @@ exports.addDocToInvoiceRecord = async (file, recParams, documentType, returnAmou
                 
                 throw new Error('Write Failure')
             }
-
-
-
 
         };
 
@@ -214,31 +192,12 @@ exports.deleteInvoiceDocUpdateRecord = async (docNumber, invoiceId, fileName, do
 
 exports.retrieveInvoices =  async (customerId) => {
 
-
     try {
-
+        
         const invoices = await Invoice.find({customerId: customerId})
-
-
-
         return invoices
 
-
-
-        // const invoices = [];
-
-        // for ( let i = 0; i < customer.invoices.length; i++) {
-        
-        //     let invoice = await Invoice.findById(customer.invoices[i])
-        //     invoices.push(invoice)
-
-        // }
-
-        // return invoices
-
-
     } catch (err){
-
         throw err;
 
     }

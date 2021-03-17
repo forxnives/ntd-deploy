@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Box, Button, ButtonCSS, Icon, Input, Table, TableBody, TableCaption, TableHead, TableRow, TableCell, Text, DropZone, DropZoneProps, DropZoneItem, Label } from '@admin-bro/design-system';
+import { Box, Button, ButtonCSS, Input, DropZone, DropZoneProps, DropZoneItem } from '@admin-bro/design-system';
 import { BasePropertyProps } from 'admin-bro';
-import { priceFormat } from './../../helpers';
 import Typography from '@material-ui/core/Typography';
-import { unflatten } from 'flat';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -127,14 +125,12 @@ const PaymentDetailsDrawer: React.FC<BasePropertyProps> = ({drillProps, toggleDr
     const handleChequeNumberSubmit = () => {
 
       const chequeNumber = document.getElementById('chequenumberinput')
-
         setChequeNumber(chequeNumber.value)
 
     }
     
 
     const handleDelete = async (typeToDelete) => {
-
 
         try {
             const response = await fetch(`${window.location.origin}/delete/${typeToDelete}`, {
@@ -173,21 +169,17 @@ const PaymentDetailsDrawer: React.FC<BasePropertyProps> = ({drillProps, toggleDr
             <div className={classes.root}>
                 <AppBar position="static">
 
-                {/* true here is the condition that no document has been uploaded */}
                 {true && (
                   <Tabs centered value={value} onChange={handleChange} aria-label="Payment Option Tabs">
                   <Tab label="Cheque" {...a11yProps(0)} />
                   <Tab label="Transfer" {...a11yProps(1)} />
                   <Tab label="Cash Deposit" {...a11yProps(2)} />
-
-                  {/* <Tab label="Item Three" {...a11yProps(2)} /> */}
                   </Tabs>
                 )}
 
                 </AppBar>
                 <TabPanel value={value} index={record.params["paymentDoc.paymentDocType"] && record.params["paymentDoc.paymentDocType"] !== 'CHEQUE' ? (1) : (0) }>
-                {/* <TabPanel value={value} index={0}> */}
-                
+                                
                 <Box>
 
                     { record.params["paymentDoc.paymentDocPath"] ? (                     
@@ -222,11 +214,8 @@ const PaymentDetailsDrawer: React.FC<BasePropertyProps> = ({drillProps, toggleDr
                 </TabPanel>
 
                 <TabPanel value={value} index={record.params["paymentDoc.paymentDocType"] && record.params["paymentDoc.paymentDocType"] === 'TRANSFER' ? (0) : (1) }>
-                {/* <TabPanel value={value} index={1}> */}
-
+                
                 <Box>
-
-
 
                     { record.params["paymentDoc.paymentDocPath"] ? (                     
 
@@ -263,10 +252,8 @@ const PaymentDetailsDrawer: React.FC<BasePropertyProps> = ({drillProps, toggleDr
 
 
                 <TabPanel value={value} index={record.params["paymentDoc.paymentDocType"] && record.params["paymentDoc.paymentDocType"] === 'DEPOSIT' ? (0) : (2) }>
-                {/* <TabPanel value={value} index={2}> */}
-
+                
                 <Box>
-
     
                     { record.params["paymentDoc.paymentDocPath"] ? (                     
 

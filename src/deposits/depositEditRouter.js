@@ -1,19 +1,15 @@
 
 const express = require('express');
-const { queryDeposits, bulkCreateDeposit, bulkAddToDeposit, addDateToDeposit, addDepositStatusToDeposit} = require('./depositController');
-
-
+const { addDateToDeposit, addDepositStatusToDeposit} = require('./depositController');
 const router = express.Router();
 
-router.route('/:params')
 
+router.route('/:params')
 
   .put(
     async (req, res) => {
 
         try {
-
-          
 
           if (req.params.params ==='date' ){
 
@@ -27,10 +23,6 @@ router.route('/:params')
             const data = await addDepositStatusToDeposit(req.body.depositStatus, req.body.depositId)
             res.json({ data: data });
           }
-
-
-
-
 
         } catch(err) {
 

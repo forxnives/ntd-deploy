@@ -3,7 +3,6 @@ const { Schema } = mongoose;
 const argon2 = require('argon2');
 
 
-
 const customerSchema = new Schema({
 
     userName: String,
@@ -12,16 +11,12 @@ const customerSchema = new Schema({
     invoices: [String],
     trn: String,
     email: String,
-    password: String,
-
-    
+    password: String,   
     orderCount: {
         type: Number,
         default: 0
     },
-
-
-
+    
 })
 
 customerSchema.pre('save', async function(next) {
@@ -29,7 +24,7 @@ customerSchema.pre('save', async function(next) {
     
     try {
       if (user.isModified('password') || user.isNew) {
-        // validate password is long enough and has special characters
+  
         const hashedPassword = await argon2.hash(user.password);
         user.password = hashedPassword;
       }
@@ -40,17 +35,10 @@ customerSchema.pre('save', async function(next) {
     }
   })
   
-  // comparison function for when user logins
-  // password in this case will be PLAINTEXT, readable password
   customerSchema.methods.comparePasswords = function(password) {
     const user = this;
-
     return argon2.verify(user.password, password);
   }
-
-
-
-
 
 const Customer = mongoose.model('Customer', customerSchema);
 module.exports = { customerSchema, Customer };

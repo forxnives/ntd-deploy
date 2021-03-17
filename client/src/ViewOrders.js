@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from 'react';
-
-
-import PropTypes from 'prop-types';
+import React from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
@@ -16,7 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-
 import { withRouter } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 
@@ -40,9 +36,6 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 
-
-
-
 const useRowStyles = makeStyles({
     root: {
       '& > *': {
@@ -50,7 +43,6 @@ const useRowStyles = makeStyles({
       },
     },
   });
-
 
   function createData(id, number, date, items, status, requests, repliedPrice) {
     return {
@@ -65,16 +57,11 @@ const useRowStyles = makeStyles({
     };
   }
 
-
-
   function Row(props) {
     const { row, history, update, updateValue } = props;
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
-
-
     const requestInvoice = async (id) => {
-
 
         try {
             const response = await fetch(`${window.location.origin}/requestinvoice`, {
@@ -88,9 +75,7 @@ const useRowStyles = makeStyles({
                 }),
             })
 
-
             const data = await response.json()
-
 
             if (response.status===500) {
 
@@ -101,15 +86,11 @@ const useRowStyles = makeStyles({
                 history.push('/app/submitsuccess')
             }
 
-
-
-          
         } catch(err) {
 
             console.log(err.message)
         }
     }
-
 
   
     return (
@@ -132,8 +113,6 @@ const useRowStyles = makeStyles({
           <StyledTableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box margin={1}>
-
-
 
                 <Table size="small" aria-label="purchases">
                   <TableHead>
@@ -158,7 +137,6 @@ const useRowStyles = makeStyles({
                   </TableBody>
                 </Table>
 
-
                 <Box marginTop={2}>
 
                 {
@@ -173,18 +151,13 @@ const useRowStyles = makeStyles({
                     </Button>
                     ) }
 
-                    
                     </Box>
                   ) : (
                     null
                   )
                 }
 
-
                 </Box>
-
-
-              
               </Box>
             </Collapse>
           </StyledTableCell>
@@ -192,34 +165,9 @@ const useRowStyles = makeStyles({
       </React.Fragment>
     );
   }
-  
-  // Row.propTypes = {
-  //   row: PropTypes.shape({
-  //     calories: PropTypes.number.isRequired,
-  //     carbs: PropTypes.number.isRequired,
-  //     fat: PropTypes.number.isRequired,
-  //     history: PropTypes.arrayOf(
-  //       PropTypes.shape({
-  //         amount: PropTypes.number.isRequired,
-  //         customerId: PropTypes.string.isRequired,
-  //         date: PropTypes.string.isRequired,
-  //       }),
-  //     ).isRequired,
-  //     name: PropTypes.string.isRequired,
-  //     price: PropTypes.number.isRequired,
-  //     protein: PropTypes.number.isRequired,
-  //   }).isRequired,
-  // };
-  
-
 
 const ViewOrders = ({history, ordersArray, update, updateValue}) => {
 
-    
-    
-
-
-    // const classes = useStyles();
 
     const rows = ordersArray.map(order => {
 
@@ -236,7 +184,6 @@ const ViewOrders = ({history, ordersArray, update, updateValue}) => {
     return (
 
         <TableContainer component={Paper}>
-
 
         {ordersArray.length ? (
 
@@ -263,7 +210,6 @@ const ViewOrders = ({history, ordersArray, update, updateValue}) => {
           <h4 style={{paddingLeft: 20 + 'px'}} > No orders </h4>
 
         ) }
-
 
 
       </TableContainer>

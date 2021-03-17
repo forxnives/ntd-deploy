@@ -1,4 +1,3 @@
-// Require library
 var xl = require('excel4node');
  
 exports.ExcelDepositCreate = async (chequeInvoicesUnreduced, cashInvoices, submissionDate) => {
@@ -43,26 +42,6 @@ exports.ExcelDepositCreate = async (chequeInvoicesUnreduced, cashInvoices, submi
 
     let chequeInvoices = chequeInvoicesGRP.invoices
 
-
-
-
-    // const cashInvoicesFiltered = cashInvoices.filter(object => (
-
-
-    //     object.status === 'PAID'
-
-    // ))
-
-
-
-    
-
-
-
-
-
-
-
     // constructing excel workbook
 
     const wb = new xl.Workbook({  
@@ -95,8 +74,8 @@ exports.ExcelDepositCreate = async (chequeInvoicesUnreduced, cashInvoices, submi
         border: {
         
             left: {
-                style: 'medium', //§18.18.3 ST_BorderStyle (Border Line Styles) ['none', 'thin', 'medium', 'dashed', 'dotted', 'medium', 'double', 'hair', 'mediumDashed', 'dashDot', 'mediumDashDot', 'dashDotDot', 'mediumDashDotDot', 'slantDashDot']
-                color: '#000000' // HTML style hex value
+                style: 'medium', 
+                color: '#000000' 
             },
             right: {
                 style: 'medium',
@@ -118,8 +97,8 @@ exports.ExcelDepositCreate = async (chequeInvoicesUnreduced, cashInvoices, submi
             border: {
             
                 left: {
-                    style: 'thin', //§18.18.3 ST_BorderStyle (Border Line Styles) ['none', 'thin', 'medium', 'dashed', 'dotted', 'medium', 'double', 'hair', 'mediumDashed', 'dashDot', 'mediumDashDot', 'dashDotDot', 'mediumDashDotDot', 'slantDashDot']
-                    color: '#000000' // HTML style hex value
+                    style: 'thin', 
+                    color: '#000000' 
                 },
                 right: {
                     style: 'thin',

@@ -1,5 +1,5 @@
 const express = require('express');
-const { replyToOrder, createOrder, retrieveOrders, requestInvoice } = require('./orderController');
+const { requestInvoice } = require('./orderController');
 const router = express.Router();
 
 router.route('/')
@@ -8,13 +8,8 @@ router.route('/')
 
     try {
       const { body } = req;
-
-
       const data = await requestInvoice(body.orderId)
-
-
       res.json({ data:  data });
-
 
     } catch(err) {
       console.log(err);
@@ -23,6 +18,4 @@ router.route('/')
 
   });
   
-
-
 module.exports = router;

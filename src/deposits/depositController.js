@@ -3,15 +3,8 @@ const { subInvoice } = require('./depositModel');
 const { Invoice } = require('../invoices/invoiceModel')
 const archiver = require('archiver');
 const { ExcelDepositCreate } = require('./depositExcelController')
-
-
-
-
-
 const fs = require('fs');
 const rimraf = require("rimraf");
-// const { default: ChequeSupportinDocs } = require('./components/supportingdocs.cheques');
-
 
 
 exports.bulkCreateDeposit = async (data) => {
@@ -72,10 +65,7 @@ exports.bulkAddToDeposit = async (id, payload) => {
 
 } 
 
-
-
 exports.addDocToDepositRecord = async (file, recParams, documentType)  => {
-
 
     try {
 
@@ -110,7 +100,6 @@ exports.addDocToDepositRecord = async (file, recParams, documentType)  => {
 
         };
 
-
         savedDeposit = deposit.save()
 
         return savedDeposit
@@ -119,7 +108,6 @@ exports.addDocToDepositRecord = async (file, recParams, documentType)  => {
         return err
     }
 }
-
 
 
 exports.deleteDepositDocUpdateRecord = async (docNumber, depositId, fileName, documentType) => {
@@ -132,12 +120,9 @@ exports.deleteDepositDocUpdateRecord = async (docNumber, depositId, fileName, do
             console.log('File deleted!');
         }); 
 
-
         rimraf(`./uploads/${depositId}/${documentType}/${docNumber}`, function () { console.log("done"); });
 
-        
         const deposit = await Deposit.findById(depositId)
-
 
         if (documentType === 'signature') {
             deposit.supportingDocs.signature = null
@@ -187,7 +172,6 @@ exports.addDepositStatusToDeposit = async (status, depositId) => {
 }
 
 
-
 exports.removeInvoiceFromDeposit = async (invoiceId, depositId) => {
 
     try {
@@ -231,13 +215,7 @@ exports.createExcelFile = async (depositId) => {
 
       const chequeInvoices = [];
       const cashInvoices = [];
-
-      const chequeTotal = 0;
-      const cashTotal = 0;
-
-      
-
-///////////////////////////////////////////////////////////////////////////////
+    
 
         const deposit = await Deposit.findById(depositId);
         const invoices = deposit.invoices.map(obj => (obj.invoiceId))
@@ -253,10 +231,8 @@ exports.createExcelFile = async (depositId) => {
             if (invoice.returned && invoice.returned.returnAmount) {
                 price = price - invoice.returned.returnAmount
                 
-
             } 
 
-              
             cashInvoices.push({
               customerCode: invoice.customerCode,
               customer: invoice.customer,
@@ -265,7 +241,7 @@ exports.createExcelFile = async (depositId) => {
               amount:price
             })
 
-            // cashTotal = cashTotal + invoice.price
+
           }else {
 
             if (invoice.paymentDoc.paymentDocType === 'CHEQUE'){
@@ -284,20 +260,12 @@ exports.createExcelFile = async (depositId) => {
                 invoiceNumber: invoice.number,
                 amount: price
               })
-
-              
             }
-
           }
 
-          
         }
 
-
         ExcelDepositCreate(chequeInvoices, cashInvoices, deposit.submissionDate)    
-
-////////////////////////////////////////////////////////////////////////
-
       
         return depositId
 
@@ -306,13 +274,11 @@ exports.createExcelFile = async (depositId) => {
     }
 }
 
-
 exports.queryDeposits = async () => {
 
     try {
 
         const deposits = await Deposit.find({depositStatus: 'PENDING'})
-
         return deposits;
 
     }catch (err){
@@ -328,8 +294,6 @@ exports.depositDocsZip = async (depositId) => {
 
     try {
         const deposit = await Deposit.findById(depositId)
-
-
         const _dir = `./uploads/deposits/`;
 
         if (!fs.existsSync(_dir)){
@@ -342,44 +306,33 @@ exports.depositDocsZip = async (depositId) => {
             fs.mkdirSync(__dir);
         }
 
-
-        // create a file to stream archive data to.
         const output = fs.createWriteStream(__dir + '/deposit.zip');
         const archive = archiver('zip', {
-        zlib: { level: 9 } // Sets the compression level.
+        zlib: { level: 9 }
         });
 
-        // listen for all archive data to be written
-        // 'close' event is fired only when a file descriptor is involved
         output.on('close', function() {
 
         });
 
-        // This event is fired when the data source is drained no matter what was the data source.
-        // It is not part of this library but rather from the NodeJS Stream API.
-        // @see: https://nodejs.org/api/stream.html#stream_event_end
         output.on('end', function() {
         
         });
 
-        // good practice to catch warnings (ie stat failures and other non-blocking errors)
         archive.on('warning', function(err) {
         if (err.code === 'ENOENT') {
-            // log warning
+
         } else {
-            // throw error
+
             throw err;
         }
         });
 
-        // good practice to catch this error explicitly
         archive.on('error', function(err) {
         throw err;
         });
 
-        // pipe archive data to the file
         archive.pipe(output);
-
 
         archive.file(`./uploads/Excel.xlsx`, { name: `Excel.xlsx` });
 
@@ -391,12 +344,9 @@ exports.depositDocsZip = async (depositId) => {
             archive.file(`./uploads/${deposit._id}/bankreciept/${deposit.supportingDocs.bankReciept.bankRecieptDocPath}/${deposit.supportingDocs.bankReciept.bankRecieptDocName}`, { name: `${deposit.supportingDocs.bankReciept.bankRecieptDocName}` });
         }
 
-
         for (let i=0 ; i < deposit.invoices.length ; i++) {
 
-            
             const invoice = await Invoice.findById(deposit.invoices[i].invoiceId)
-
 
             if (invoice.paymentDoc.paymentDocType){
                 
@@ -416,13 +366,9 @@ exports.depositDocsZip = async (depositId) => {
         archive.finalize();
 
 
-
     } catch (err) {
-
         throw err;
 
     }
-
-
 
 }

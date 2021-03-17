@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Box, Button, ButtonCSS, Table, TableCaption, TableHead, TableRow, TableCell, Text, Icon, TableBody, DatePicker, DatePickerProps  } from '@admin-bro/design-system';
+import { Box, ButtonCSS, Table, TableCaption, TableHead, TableRow, TableCell, Text, Icon, TableBody, DatePicker } from '@admin-bro/design-system';
 import { BasePropertyProps } from 'admin-bro';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -8,7 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import {createObjectsFromParams, priceFormat } from './../../helpers';
 import Drawer from '@material-ui/core/Drawer';
-import ChequeSupportingDocs from './supportingdocs.cheques';
 import SignatureSupportingDocs from './supportingdocs.signature';
 import BankRecieptSupportingDocs from './supportingdocs.bankreciept';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -43,10 +42,6 @@ const useStyles = makeStyles((theme) => ({
 const DisplayDeposit: React.FC<BasePropertyProps> = (props) => {
 
     const { record } = props;
-
-    
-    
-
     const [ depositInvoices, setDepositInvoices ] = useState([]);
     const [ depositStatus, selectDepositStatus ] = useState(record.params.depositStatus);
     const [ drawerToggle, toggleDrawerToggle ] = useState(false);
@@ -55,12 +50,10 @@ const DisplayDeposit: React.FC<BasePropertyProps> = (props) => {
 
  
     const classes = useStyles();
-
     const ExcelDownloadButton = styled.a`${ButtonCSS};`
 
 
     useEffect(() => {
-
         
         document.querySelector('.admin-bro_H2').innerText = `Deposit`;
         const breadcrumbs = document.querySelectorAll('.breadcrumbs__BreadcrumbLink-yjyesi-0')
@@ -86,7 +79,6 @@ const DisplayDeposit: React.FC<BasePropertyProps> = (props) => {
 
         async function handleExcelCreate () {
 
-
             const response = await fetch(`${window.location.origin}/depositexcel`, {
     
                 method: 'PUT',
@@ -100,7 +92,6 @@ const DisplayDeposit: React.FC<BasePropertyProps> = (props) => {
                 }),
             })
         }
-
 
 
         const handleZipDepositDocs = async () => {
@@ -119,24 +110,10 @@ const DisplayDeposit: React.FC<BasePropertyProps> = (props) => {
             })
         }
 
-
-
-
-
         handleExcelCreate ()
         populateInvoices();
         handleZipDepositDocs();
     }, [selectedDate]);
-
-
-    useEffect(()=>{
-        
-        
-
-    },[value])
-
-
-
 
 
     const handleDateSelect = async (date) => {
@@ -216,10 +193,7 @@ const DisplayDeposit: React.FC<BasePropertyProps> = (props) => {
    
         if (paymentMethod === 'CASH') {  
 
-            //TURN THIS INTO A REDUCER.  PROBLEM IS PAYEMENT TYPE NOW HAS AN ENUM F TWO OPTIONS.  NEED TO CHEC PAYMENTDOCTYPE NOW
-
             depositInvoiceObjects = depositInvoiceObjects.filter(object => (
-
 
                 object.paymentMethod === 'CASH' && !object.paymentDoc && object.status === 'PAID'
 
@@ -230,20 +204,20 @@ const DisplayDeposit: React.FC<BasePropertyProps> = (props) => {
         return depositInvoiceObjects.map(object => (
             <TableRow>
                 <TableCell>{object.customerCode}</TableCell>
-                {/* <TableCell>{object.customer}</TableCell> */}
-                {/* <TableCell>{object.paymentMethod}</TableCell> */}
                 <TableCell>{object.number}</TableCell>
-                <TableCell>{
+                <TableCell>
+                    
+                    {
                 
-                
-                object.returned ? 
+                        object.returned ? 
                         
-                        (priceFormat(object.price - object.returned.returnAmount)
+                            (priceFormat(object.price - object.returned.returnAmount)
                         
                         ) : (
+
                             priceFormat(object.price))
                 
-                        }
+                    }
                 
                 
                 </TableCell>

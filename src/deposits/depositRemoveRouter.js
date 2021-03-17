@@ -1,9 +1,8 @@
-const { paramsToFormData } = require('admin-bro');
 const express = require('express');
 const { removeInvoiceFromDeposit } = require('./depositController');
-
-
 const router = express.Router();
+
+
 
 router.route('/')
 
@@ -14,7 +13,6 @@ router.route('/')
           const { body } = req;
           const data = await removeInvoiceFromDeposit(body.invoiceId, body.depositId)
 
-        //   res.json({ data: data });
         res.json({ data: data });
 
 

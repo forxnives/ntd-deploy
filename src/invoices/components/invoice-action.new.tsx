@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-// import { Box, Button, ButtonCSS, Input, TableCaption, Text, Icon, TableHead, TableRow, TableCell, CheckBox, Link, TableBody, Table, Badge, Label } from '@admin-bro/design-system';
-import { Box, Button, ButtonCSS, Input, Text, Icon, CheckBox, Link, Badge, Label } from '@admin-bro/design-system';
-import { TableCaption,FormControl, TableHead, TableRow, TableCell, TableBody, Table, MenuItem, Select} from '@material-ui/core/';
+import { Box, Input, Icon, Label } from '@admin-bro/design-system';
+import { FormControl, TableHead, TableRow, TableCell, TableBody, Table, MenuItem, Select} from '@material-ui/core/';
 import { BasePropertyProps } from 'admin-bro';
-import { priceFormat } from './../../helpers' 
-
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-// import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-// import Select from '@material-ui/core/Select';
 import { withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,11 +20,8 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
 
 
     const [rowsArray, setRowsArray] = useState([1, 2])
-
     const [ selectedPaymentMethod, changeSelectedPaymentMethod ] = useState('CASH')
-
     const [ selectedPaymentStatus, changeSelectedPaymentStatus ] = useState('UNPAID')
-
     const [ error, setError ] = useState(undefined);
 
     const classes = useStyles();
@@ -40,7 +29,6 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
     useEffect (() => {
 
     }, [rowsArray]) 
-
 
 
     const handleInvoiceCreateSubmit = async (e) => {
@@ -68,9 +56,6 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
                 payStatus = 'PAID'
             }
 
-            
-
-            
             const response = await fetch(`${window.location.origin}/invoicecreate`, {
 
                 method: 'POST',
@@ -100,8 +85,6 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
 
             const data = await response.json();
 
-            
-
             if (data.message){
                 alert('Check fields and try again')
             }else{
@@ -116,13 +99,6 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
 
     }
 
-
-
-
-
-
-
-
     const handleAddRow = () => {
 
         setRowsArray([...rowsArray, (rowsArray.length+1)])
@@ -130,18 +106,14 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
     }
 
 
-
-
     const handleRowDelete = (e, value) => {
-        
+
 
         if (rowsArray.length > 1) {
-
 
             if (e.target.nodeName === "svg") {
 
                 const nodeArray = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.children
-
                 e.target.parentNode.parentNode.parentNode.parentNode.remove()
 
             }
@@ -150,16 +122,12 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
             if (e.target.nodeName === "path") {
 
                 const nodeArray = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.children
-
                 e.target.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
 
             }            
         }
 
     }
-
-
-
 
 
     const createTableRows = (rowsArray) => (
@@ -180,9 +148,7 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
                     
                     { index === 0 ? (null) : (<Icon icon='Close' />) }
 
-
                     </Box></TableCell>
-
 
             </TableRow>
         ))
@@ -194,14 +160,9 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
 
         <Box variant="grey">
 
-            
         <Box variant='white'>
 
         <form onSubmit={(e)=> handleInvoiceCreateSubmit(e)}> 
-
-
-        {/* <Box variant='white'> */}
-            
 
                 <Table>
 
@@ -237,7 +198,6 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
                             
                         </TableCell>
 
-
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -248,7 +208,6 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
                             <TableCell><Input id="customerinput"  /> </TableCell>
                                 <TableCell>
                                 
-            
                                 <FormControl className={classes.formControl}>
                                     
                                     <Select
@@ -263,7 +222,6 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
 
                                     </Select>
                                 </FormControl>                                            
-                                    
                             
                                 </TableCell>
 
@@ -280,31 +238,21 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
                                             onChange={(e)=> changeSelectedPaymentStatus(e.target.value)}
                                         >
 
-
                                             <MenuItem value='UNPAID'> Unpaid </MenuItem>
                                             <MenuItem value='PAID'> Paid </MenuItem>
 
 
                                         </Select>
                                     </FormControl>                                            
-                                    
-                            
                                 
                                 </TableCell>
 
-
                         </TableRow>
-
 
                     </TableBody>
                 </Table>
-
-                {/* <Input type='submit' width={1/2} /> */}
-
-                {/* </Box> */}
-
-
                 
+
             <Box maxWidth='300px' marginTop='xxl'>
 
                 <Table>
@@ -316,11 +264,9 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
                         <TableCell>
                                                     Quantity
 
-                            
                         </TableCell>
                         <TableCell>
                                                     Packing
-
                             
                         </TableCell>
                         <TableCell>Description</TableCell>
@@ -339,10 +285,7 @@ const NewInvoiceAction: React.FC<BasePropertyProps> = (props) => {
                 <Input  id='totalpriceinput' />
                 <Input  style={{marginTop: 10 + 'px'}} type='submit' width={1/2} />
 
-
             </Box>
-        
-
         
         </form>
         </Box>

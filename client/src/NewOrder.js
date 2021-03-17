@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from 'react';
-
-
-import { Box, Button, Container, TableCaption, Label, Input, FormControl, Icon, TableHead, TableRow, TableCell, TableBody, Table, MenuItem, Select} from '@material-ui/core/';
-
+import { Box, Button, Container, Input, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core/';
 import CancelIcon from '@material-ui/icons/Cancel';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-// import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-// import Select from '@material-ui/core/Select';
 import { withRouter } from 'react-router-dom';
 
 
@@ -34,13 +26,7 @@ const NewOrder = ({history, update, updateValue, invoicesArray, user}) => {
 
 
     const [rowsArray, setRowsArray] = useState([1, 2])
-
-    const [ selectedPaymentMethod, changeSelectedPaymentMethod ] = useState('CASH')
-
-    const [ selectedPaymentStatus, changeSelectedPaymentStatus ] = useState('UNPAID')
-
     const [ error, setError ] = useState(undefined);
-
     const classes = useStyles();
 
     useEffect (() => {
@@ -54,7 +40,6 @@ const NewOrder = ({history, update, updateValue, invoicesArray, user}) => {
 
 
 
-
     const handleOrderCreateSubmit = async (e) => {
 
         try {
@@ -65,10 +50,6 @@ const NewOrder = ({history, update, updateValue, invoicesArray, user}) => {
                 throw new Error('Unpaid Invoice')
             }
 
-
-
-
-
             const nodeList = document.querySelectorAll('.orderrow')
 
             const ordersArray = [...nodeList].map(node => {
@@ -76,8 +57,6 @@ const NewOrder = ({history, update, updateValue, invoicesArray, user}) => {
                  const inputNodes = node.querySelectorAll('input')
                  return {quantity: inputNodes[0].value, packing: inputNodes[1].value, item: inputNodes[2].value}
             })
-
-
 
             const response = await fetch(`${window.location.origin}/ordercreate`, {
                 method: 'POST',
@@ -91,7 +70,6 @@ const NewOrder = ({history, update, updateValue, invoicesArray, user}) => {
                     customerCode: user.code,
                     invoiceStatus: 'REQUESTED',
                     date: new Date(),
-                
                     requests: ordersArray,
                     
                 }),
@@ -106,8 +84,7 @@ const NewOrder = ({history, update, updateValue, invoicesArray, user}) => {
                 update(!updateValue)
                 history.push('/app/submitsuccess')
             }
-
-            
+           
         
         } catch(err) {
             setError(err.message);
@@ -120,22 +97,17 @@ const NewOrder = ({history, update, updateValue, invoicesArray, user}) => {
     const handleAddRow = () => {
 
         setRowsArray([...rowsArray, (rowsArray.length+1)])
-        
     }
-
 
 
     const handleRowDelete = (e, value) => {
         
-
         if (rowsArray.length > 1) {
-
 
             if (e.target.nodeName === "svg") {
                 e.target.parentNode.parentNode.parentNode.remove()
             }
-    
-    
+        
             if (e.target.nodeName === "path") {
                 e.target.parentNode.parentNode.parentNode.parentNode.remove()
             }            
@@ -144,11 +116,8 @@ const NewOrder = ({history, update, updateValue, invoicesArray, user}) => {
     }
 
 
-
     const createTableRows = (rowsArray) => (
        
-
-
         rowsArray.map((row, index, array) => (
             <TableRow  className='orderrow'>
 
@@ -165,28 +134,17 @@ const NewOrder = ({history, update, updateValue, invoicesArray, user}) => {
                     
                     { index === 0 ? (null) : (<CancelIcon />) }
 
-
                     </Box></TableCell>
-
 
             </TableRow>
         ))
 
     )
 
-
-
-
-
     return (
 
         
-
         <form onSubmit={(e)=> handleOrderCreateSubmit(e)}> 
-            
-
-            {/* <Input type='submit' width={1/2} /> */}
-
                
         <Container disableGutters>
 
@@ -198,12 +156,10 @@ const NewOrder = ({history, update, updateValue, invoicesArray, user}) => {
 
                     <TableCell>
                                                 Quantity
-
                         
                     </TableCell>
                     <TableCell>
                                                 Packing
-
                         
                     </TableCell>
                     <TableCell>Description</TableCell>
@@ -218,15 +174,9 @@ const NewOrder = ({history, update, updateValue, invoicesArray, user}) => {
                 </TableBody>
             </table>
 
-            {/* <Label htmlFor="input1">Total Price</Label> */}
-
-            {/* <Input type='submit' /> */}
             <Button style={{marginTop: 20 +'px', marginLeft: 10 +'px'}} type='submit' variant="contained" color='primary'>Submit</Button>
 
-
-
         </Container>
-
         
         </form>
 

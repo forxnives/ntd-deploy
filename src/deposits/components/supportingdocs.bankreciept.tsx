@@ -1,20 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Box, Button, ButtonCSS, Icon, Input, Table, TableBody, TableCaption, TableHead, TableRow, TableCell, Text, DropZone, DropZoneProps, DropZoneItem, Label } from '@admin-bro/design-system';
+import { Box, Button, ButtonCSS, DropZone, DropZoneProps, DropZoneItem } from '@admin-bro/design-system';
 import { BasePropertyProps } from 'admin-bro';
-import { makeStyles } from '@material-ui/core/styles';
 
 
 const BankRecieptSupportingDocs: React.FC<BasePropertyProps> = ({drillProps, toggleDrawer}) => {
 
     const { property, record, onChange } = drillProps;
 
-
     const ReturnDownloadButton = styled.a`${ButtonCSS};`
-
-
-
-
 
     const handleDropZone: DropZoneProps['onChange'] = async (files, docType) => {
 
@@ -24,12 +18,7 @@ const BankRecieptSupportingDocs: React.FC<BasePropertyProps> = ({drillProps, tog
             const file = files[0];
   
             formData.append("documentType", docType.toUpperCase())
-            formData.append("record", JSON.stringify(record))
-
-            // if (chequeNumber){
-            //   formData.append("chequeNumber", chequeNumber )
-            // }
-  
+            formData.append("record", JSON.stringify(record))  
             formData.append("data", file)
   
             const response = await fetch(`${window.location.origin}/depositdocupload/${docType}`, {
@@ -54,10 +43,6 @@ const BankRecieptSupportingDocs: React.FC<BasePropertyProps> = ({drillProps, tog
         }
   
     }
-
-
-
-
 
 
     const handleDelete = async (typeToDelete) => {
@@ -91,10 +76,6 @@ const BankRecieptSupportingDocs: React.FC<BasePropertyProps> = ({drillProps, tog
     }
 
 
-
-
-
-
     return (
 
 
@@ -117,7 +98,6 @@ const BankRecieptSupportingDocs: React.FC<BasePropertyProps> = ({drillProps, tog
         
         ) : (
 
-        // <Label>{'upload'}</Label>
         <DropZone onChange={(files) => handleDropZone(files, 'bankreciept')}>  
 
         </DropZone>
@@ -125,7 +105,6 @@ const BankRecieptSupportingDocs: React.FC<BasePropertyProps> = ({drillProps, tog
         )}
 
     </Box>
-
 
     )
 }

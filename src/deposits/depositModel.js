@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-
-
 const subInvoiceSchema = new Schema({
 
     invoiceId: String,
@@ -11,7 +9,6 @@ const subInvoiceSchema = new Schema({
 })
 
 const depositSchema = new Schema({
-
 
     submissionDate: String,
 

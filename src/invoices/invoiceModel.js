@@ -3,21 +3,8 @@ const { orderItemsSubSchema } = require('../orders/orderModel')
 const { Schema } = mongoose;
 
 
-
-// const uploadedDocSubSchema = new Schema({
-
-//     path: String,
-//     type: String,
-//     size: Number,
-//     folder: String,
-//     filename: String
-
-// })
-
-
 const invoiceSchema = new Schema({
 
-    // invoiceId: String,
 
     number: {
         type: String,
@@ -50,8 +37,6 @@ const invoiceSchema = new Schema({
         default: 'NORMAL'
     },
 
-
-
     price: {
         type: Number,
         required: true
@@ -64,9 +49,6 @@ const invoiceSchema = new Schema({
         default: 'CASH'
     },
 
-
-
-
     orderId: {
         type: String,
         required: false
@@ -74,10 +56,7 @@ const invoiceSchema = new Schema({
 
     orderItems: [orderItemsSubSchema],
 
-
     depositId: String,
-
-
 
     cancelled: {
         cancelDocName: String,
@@ -100,8 +79,6 @@ const invoiceSchema = new Schema({
 })
 
 
-
 const Invoice = mongoose.model('Invoice', invoiceSchema);
-
 
 module.exports = { invoiceSchema, Invoice };

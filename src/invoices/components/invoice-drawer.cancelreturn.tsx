@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Box, Button, ButtonCSS, Icon, Input, Table, TableBody, TableCaption, TableHead, TableRow, TableCell, Text, DropZone, DropZoneProps, DropZoneItem, Label } from '@admin-bro/design-system';
+import { Box, Button, ButtonCSS, Input, DropZone, DropZoneProps, DropZoneItem } from '@admin-bro/design-system';
 import { BasePropertyProps } from 'admin-bro';
-import { priceFormat } from './../../helpers';
 import Typography from '@material-ui/core/Typography';
-import { unflatten } from 'flat';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -55,34 +53,16 @@ function TabPanel(props) {
   }));
   
 
-
 const InvoiceCancelReturnDrawer: React.FC<BasePropertyProps> = ({drillProps, toggleDrawer}) => {
 
-
     const { property, record, onChange } = drillProps;
-
     const classes = useStyles();
     const [value, setValue] = useState(0); 
     const [ returnAmount, setReturnAmount ] = useState(null);
+
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
-
-
-    const onUpload = (files: FileList) => {
-        const newRecord = {...record}
-        const file = files.length && files[0]
-    
-        onChange({
-          ...newRecord,
-          params: {
-            ...newRecord.params,
-            [property.name]: file,
-          }
-        })
-        event.preventDefault()
-      } 
-
 
     const handleDropZone: DropZoneProps['onChange'] = async (files, docType) => {
 
@@ -121,9 +101,6 @@ const InvoiceCancelReturnDrawer: React.FC<BasePropertyProps> = ({drillProps, tog
       }
 
     }
-
-
-
 
     
     const handleReturnAmountSubmit = () => {
@@ -182,7 +159,6 @@ const InvoiceCancelReturnDrawer: React.FC<BasePropertyProps> = ({drillProps, tog
                   <Tabs centered value={value} onChange={handleChange} aria-label="Cancel/Return Tabs">
                   <Tab label="Return" {...a11yProps(0)} />
                   <Tab label="Cancellation" {...a11yProps(1)} />
-                  {/* <Tab label="Item Three" {...a11yProps(2)} /> */}
                   </Tabs>
                 )}
 
@@ -233,9 +209,8 @@ const InvoiceCancelReturnDrawer: React.FC<BasePropertyProps> = ({drillProps, tog
                     </Box>
                     
                     ) : (
-                    // <Label>{'upload'}</Label>
+                    
                     <DropZone onChange={(files)=> handleDropZone(files, 'cancel')}>
-
                     </DropZone>
                     )}
 

@@ -1,21 +1,13 @@
 const AdminBro = require('admin-bro');
-
-const { Deposit, depositSchema } = require('./depositModel');
-
-
-
+const { Deposit } = require('./depositModel');
 const { deleteDepositBefore } = require('../deposits/actions/delete-deposit.hook');
+
 
 const canModifyOrders = ({ currentAdmin }) => currentAdmin && currentAdmin.userType === 'ADMIN';
 
-
 const options = {
 
-    // listProperties: ['invoiceDetails.number', 'number','blockId'],
-
     properties: {
-
-
 
         depositStatus: {
             isVisible: {show: false, list: true, filter: true}
@@ -91,8 +83,6 @@ const options = {
         },
         
     },
-
-    // parent: null
 
 }
 

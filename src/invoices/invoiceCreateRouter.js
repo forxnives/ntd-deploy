@@ -27,7 +27,6 @@ router.route('/')
       console.log(err);
       res.status(500).json({ message: 'internal server error' });
     }
-
   })
 
   .put(async (req, res) => {

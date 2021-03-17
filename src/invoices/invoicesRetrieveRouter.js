@@ -1,5 +1,5 @@
 const express = require('express');
-const { createInvoiceFromOrder, populateInvoicesById, createNewInvoice, retrieveInvoices } = require('./invoiceController');
+const { retrieveInvoices } = require('./invoiceController');
 
 const router = express.Router();
 
@@ -10,11 +10,9 @@ router.route('/')
     try {
       const { body } = req;
 
-    
       const data = await retrieveInvoices(body.customerId)
       
       res.json({ data:  data });
-
 
     } catch(err) {
       console.log(err);
@@ -23,6 +21,5 @@ router.route('/')
 
   });
   
-
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const {Order}  = require('./orderModel')
-
 const {Customer} = require('../customers/customerModel')
+
 
 exports.replyToOrder = async (orderId, data) => {
 
@@ -12,7 +12,6 @@ exports.replyToOrder = async (orderId, data) => {
         order.invoiceStatus = 'REPLIED';
         const savedOrder = order.save();
         return savedOrder;
-
 
     }catch (err){
 
@@ -28,11 +27,6 @@ exports.createOrder = async (body) => {
         
         const newOrder = new Order(body)
 
-        
-
-
-
-
         const customer = await Customer.findById(newOrder.customerId)
 
         customer.orders.push(newOrder._id)
@@ -45,10 +39,7 @@ exports.createOrder = async (body) => {
 
         const savedOrder = await newOrder.save();
 
-
-
         return savedOrder
-
 
     }catch (err){
         throw err;
@@ -71,7 +62,6 @@ exports.retrieveOrders = async (customerId) => {
         }
 
         return orders
-
 
     } catch (err){
 
@@ -101,7 +91,9 @@ exports.requestInvoice = async (orderId) => {
         return savedOrder
 
     }   catch (err) {
+
         throw err;
+
     }
 
 

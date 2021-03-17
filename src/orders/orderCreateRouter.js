@@ -1,5 +1,5 @@
 const express = require('express');
-const { replyToOrder, createOrder } = require('./orderController');
+const { createOrder } = require('./orderController');
 const router = express.Router();
 
 router.route('/')
@@ -8,10 +8,7 @@ router.route('/')
     try {
       const { body } = req;
 
-
-        // const newOrder = await replyToOrder(body.orderId, body);
         const newOrder = await createOrder(body);
-
 
       res.json({ data:  newOrder });
     } catch(err) {

@@ -10,9 +10,6 @@ import Paper from '@material-ui/core/Paper';
 import { priceFormat } from './helpers';
 
 
-
-
-
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.primary.main,
@@ -31,9 +28,6 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-
-
-
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -44,8 +38,6 @@ function createData(number, total, status, id) {
   return { number, total, status, id };
 }
 
-
-
 export default function ViewInvoices({invoicesArray}) {
 
   const classes = useStyles();
@@ -53,14 +45,12 @@ export default function ViewInvoices({invoicesArray}) {
 
     return createData(invoice.number, priceFormat(invoice.price), invoice.status, invoice._id )
 
-
   })
 
   return (
     <TableContainer component={Paper}>
 
       {
-
         invoicesArray.length ? (
           <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -87,7 +77,6 @@ export default function ViewInvoices({invoicesArray}) {
         ) : (
           <h4 style={{paddingLeft: 20 + 'px'}}> No invoices </h4>
         )
-
       }
 
     </TableContainer>

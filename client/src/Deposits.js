@@ -6,17 +6,10 @@ import Title from './Title';
 
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
   Link as LinkRoute,
-  withRouter 
+
 } from "react-router-dom";
 
-
-function preventDefault(event) {
-  event.preventDefault();
-}
 
 const useStyles = makeStyles({
   depositContext: {

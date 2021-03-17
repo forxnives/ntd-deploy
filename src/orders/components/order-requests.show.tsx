@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { Box, Button, ButtonCSS, Table, TableRow, TableCell, TableCaption, TableHead, TableBody,  Text, Icon,   } from '@admin-bro/design-system';
+import React, { useEffect } from 'react';
+import { Box, Table, TableRow, TableCell, TableCaption, TableHead, TableBody,  Text, Icon } from '@admin-bro/design-system';
 import { BasePropertyProps } from 'admin-bro';
-
-
 import {createObjectsFromParams } from '../../helpers.js'
 
 
 const DisplayOrder: React.FC<BasePropertyProps> = (props) => {
 
-
     const { record } = props;
-
 
     useEffect(() => {
         // Update the document title using the browser API
@@ -21,15 +16,12 @@ const DisplayOrder: React.FC<BasePropertyProps> = (props) => {
       });
 
 
-
     const tableRows = (requestObjects) => {
         return requestObjects.map(object => (
             <TableRow>
             <TableCell>{`${object.quantity}`}</TableCell>
             <TableCell>{`${object.packing}`}</TableCell>
             <TableCell>{`${object.item}`}</TableCell>
-
-
             </TableRow>
         ))
     }
@@ -38,8 +30,7 @@ const DisplayOrder: React.FC<BasePropertyProps> = (props) => {
     return (
 
         <Box marginTop='xxl'>
-            {/* <h1>REQUASTS</h1> */}
-
+            
             <Table>
                 <TableCaption>
                     <Text as="span">{`${record.params.customer}`}</Text>

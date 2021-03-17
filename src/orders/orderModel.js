@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-
 const orderItemsSubSchema = new Schema({
     
         quantity: {
@@ -19,8 +18,6 @@ const orderItemsSubSchema = new Schema({
         }
     
 })
-
-
 
 const orderSchema = new Schema({
 
@@ -53,24 +50,14 @@ const orderSchema = new Schema({
     },
 
     requests: [orderItemsSubSchema],
-
-
-
     replyItems: [orderItemsSubSchema],
 
     replyTotalPrice: String,
     replyNotes: String,
     reply: String
 
-
-
 })
 
 
-
-const Order = mongoose.model('Order', orderSchema);
-
-    
+const Order = mongoose.model('Order', orderSchema);    
 module.exports = { orderSchema, orderItemsSubSchema, Order };
-
-// module.exports = Order ;

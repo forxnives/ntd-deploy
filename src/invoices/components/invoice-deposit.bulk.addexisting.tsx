@@ -1,14 +1,10 @@
 import React, {useEffect, useState } from 'react';
-
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
-
-import { Box, Button, ButtonCSS, Text, DropDown, DropDownTrigger, DropDownMenu, DropDownItem } from '@admin-bro/design-system';
+import { Box, Button } from '@admin-bro/design-system';
 import { BasePropertyProps } from 'admin-bro';
 import { withRouter } from 'react-router-dom';
 
@@ -62,7 +58,6 @@ const BulkAddToDeposit: React.FC<BasePropertyProps> = (props) => {
                 throw new Error('no paid invoices being added')
             }
 
-
             const response = await fetch(`${window.location.origin}/depositadd`, {
 
                 method: 'PUT',
@@ -94,30 +89,11 @@ const BulkAddToDeposit: React.FC<BasePropertyProps> = (props) => {
             alert(err.message)
         }
 
-
-        // console.log(records.map(record => (record.params._id)))
     }
-
-
-    const invoiceNumbers = records.reduce((acc, record, i) => {
-
-        if (i === records.length - 2 ){
-            return acc + ' '+ record.params.number + ' and';
-        }
-
-        if (i === records.length - 1){
-            return acc + ' ' + record.params.number;
-        }
-
-        return acc + ' ' + record.params.number + ',';
-    }, '');
-
 
     return (
 
         <Box marginBottom='xxl'>
-            {/* <h1> Select the Deposit</h1> */}
-            {/* <ButtonLikeComponent href="/admin/resources/Invoice/actions/new">Create</ButtonLikeComponent> */}
 
             <Box marginBottom='xxl'>
                 <FormControl className={classes.formControl}>
@@ -129,22 +105,17 @@ const BulkAddToDeposit: React.FC<BasePropertyProps> = (props) => {
                         onChange={(e)=> setSelectedDeposit(e.target.value)}
                     >
 
-
                         { fetchedDeposits.map( deposit => (
                             <MenuItem value={deposit._id}>{deposit._id}</MenuItem>
                         )) }
 
-
-
-
                     </Select>
                 </FormControl>
             </Box>
+
             <Box marginBottom='xxl'>                
                 <Button onClick={handleDepositAdd} > Add To Deposit </Button>
             </Box>
-
-
         </Box>
     )
 }

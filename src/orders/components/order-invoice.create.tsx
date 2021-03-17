@@ -1,21 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Box, Button, ButtonCSS  } from '@admin-bro/design-system';
+import { ButtonCSS  } from '@admin-bro/design-system';
 import { BasePropertyProps } from 'admin-bro';
 
 
 const CreateInvoice: React.FC<BasePropertyProps> = (props) => {
 
-
-    const { record } = props;
-
-
-
+    
     const ButtonLikeComponent = styled.a`
   ${ButtonCSS};
 `
-
-
     return (
 
         <div>

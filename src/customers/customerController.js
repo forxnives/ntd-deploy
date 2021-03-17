@@ -2,10 +2,7 @@ const {Customer} = require('./customerModel');
 
 
 exports.createCustomer = async (email, userName, code, password, trn) => {
-
-
   try {
-
     const customer = await new Customer({
       userName,
       code,
@@ -14,25 +11,21 @@ exports.createCustomer = async (email, userName, code, password, trn) => {
       password,
     })
 
-
     const savedCustomer = await customer.save()
-
     return savedCustomer
 
   } catch (err) {
     throw err
   }
-
 }
-
 
 
 exports.findUserByEmail = async (email) => {
   try {
 
     const customer = await Customer.findOne({ email })
-
     return customer;
+
   } catch(e) {
     throw e;
   }

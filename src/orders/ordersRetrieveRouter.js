@@ -1,5 +1,5 @@
 const express = require('express');
-const { replyToOrder, createOrder, retrieveOrders } = require('./orderController');
+const { retrieveOrders } = require('./orderController');
 const router = express.Router();
 
 router.route('/')
@@ -9,15 +9,9 @@ router.route('/')
     try {
       const { body } = req;
 
-
-
       const data = await retrieveOrders(body.customerId)
 
-
-
-
       res.json({ data:  data });
-
 
     } catch(err) {
       console.log(err);

@@ -1,10 +1,8 @@
 const express = require('express');
-const { createUser, findUserByEmail, findUserById, createCustomer } = require('./customerController');
-// NOT FROM TOKENSERVICE
+const { findUserByEmail, findUserById, createCustomer } = require('./customerController');
 const { verifyToken } = require('./middleware/verifyToken');
 const { createToken } = require('./tokens/tokenService');
 const router = express.Router();
-
 
 
 
@@ -69,20 +67,16 @@ router.route('/login').post(async (req, res) => {
       res.status(401).json({ message: "password and email do not match"});
       return;
     }
-    // from userModel
-    // does the password match the hash from the db?
+
     const isMatch = await user.comparePasswords(password);
 
     if (!isMatch) {
       res.status(400).json({ message: 'password and email do not match'});
       return;
     }
-    // argument here will be the PAYLOAD of the token:
-
 
     const token = createToken({ id: user._id });
 
-    // SET-COOKIE header being attached to response    
     res.cookie('token', token);
 
 

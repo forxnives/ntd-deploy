@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Box, Button, ButtonCSS, ModalInline, Input, Icon, Text, Label, Table, TableRow, TableCell, TableCaption, TableHead, TableBody, DropDown, DropDownTrigger, DropDownMenu, DropDownItem } from '@admin-bro/design-system';
+import { Box, ButtonCSS, ModalInline, Input, Icon, Text, Label, Table, TableRow, TableCell, TableCaption, TableHead, TableBody } from '@admin-bro/design-system';
 import { BasePropertyProps } from 'admin-bro';
 import {createObjectsFromParams } from '../../helpers.js';
 import { withRouter } from 'react-router-dom';
-
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -28,36 +25,26 @@ const useStyles = makeStyles((theme) => ({
 const DisplayInvoice: React.FC<BasePropertyProps> = (props) => {
 
     const [availabilityModalOpen, setAvailabilityModalOpen] = useState(false);
-
     const [createInvoiceModalOpen, setCreateInvoiceModalOpen] = useState(false);
-
     const [ error, setError ] = useState(undefined);
-
     const [ selectedPaymentMethod, changeSelectedPaymentMethod ] = useState('CASH')
-
     const [ selectedPaymentStatus, changeSelectedPaymentStatus ] = useState('UNPAID')
-
     const classes = useStyles();
 
-
-
     const availabilityModalProps = {
-    /** ... **/
+    
     onOverlayClick: () => setAvailabilityModalOpen(false),
     onClose: () => setAvailabilityModalOpen(false),
     }
 
     const createInvoiceModalProps = {
-    /** ... **/
+    
     onOverlayClick: () => setAvailabilityModalOpen(false),
     onClose: () => setAvailabilityModalOpen(false),
     }
 
-
     const ButtonLikeComponent = styled.a`${ButtonCSS}`;
-
     const { record } = props;
-
 
 
     const replyTableRows = (requestObjects) => {
@@ -72,14 +59,12 @@ const DisplayInvoice: React.FC<BasePropertyProps> = (props) => {
         ))
     }
 
-
     const availabilityObjectConstruct = (quantityNodes, packingNodes, itemNodes) => {
 
         const quantityArray = Array.from(quantityNodes);
         const packingArray = Array.from(packingNodes);
         const itemArray = Array.from(itemNodes);
         
-
         return quantityArray.map((itemQuantity, i) => {
 
             return {
@@ -127,8 +112,6 @@ const DisplayInvoice: React.FC<BasePropertyProps> = (props) => {
         
     }
 
-
-
     const handleInvoiceCreateSubmit = async (e) => {
         try {
             e.preventDefault();
@@ -153,13 +136,9 @@ const DisplayInvoice: React.FC<BasePropertyProps> = (props) => {
                         customer: record.params.customer,
                         customerCode: record.params.customerCode,
                         customerId: record.params.customerId,
-                        
                         price: totalPrice,
                         status: selectedPaymentStatus,
-
-
                         orderId: record.params._id,
-    
                         paymentMethod: selectedPaymentMethod,
                         
                     }
@@ -170,22 +149,16 @@ const DisplayInvoice: React.FC<BasePropertyProps> = (props) => {
 
             const data = await response.json();
 
-
             if (data.message){
                 alert('Check fields and try again')
             }else{
                 props.history.push('/admin/resources/Order');
             }
             
-
-
-        
         } catch(err) {
             setError(err.message);
             console.log(err.message)
         }
-
-
 
     }
 
@@ -200,19 +173,14 @@ const DisplayInvoice: React.FC<BasePropertyProps> = (props) => {
 
             ) }
 
-
             {
                 (record.params.invoiceStatus === 'INVOICEREQUESTED') && 
                 (<ButtonLikeComponent onClick={() => setCreateInvoiceModalOpen(!createInvoiceModalOpen)}>Create Invoice</ButtonLikeComponent>)
             }
-
-            
     
             {availabilityModalOpen && 
             
             <ModalInline {...availabilityModalProps} >
-
-
 
                 <form onSubmit={handleAvailabilitySubmit}> 
                 
@@ -301,43 +269,9 @@ const DisplayInvoice: React.FC<BasePropertyProps> = (props) => {
                                 <TableRow>
                                     <TableCell><Input id="invoicenumberinput"  /> </TableCell>
                                         <TableCell>
-                                        
-                                            
-                                        {/* <DropDown>
-                                            <DropDownTrigger>
-                                            <Button onClick={(e) => e.preventDefault()} >
-                                                {selectedPaymentMethod}
-                                            </Button>
-                                            </DropDownTrigger>
-                                            <DropDownMenu>
-                                                <DropDownItem onClick = { () => changeSelectedPaymentMethod('CASH') }>
-                                                    <Text>
-                                                        Cash
-                                                    </Text>
-                                                </DropDownItem>
-                                                <DropDownItem onClick = { () => changeSelectedPaymentMethod('NET30') } >
-                                                    <Text>
-                                                    NET30
-                                                    </Text>
-                                                </DropDownItem>
-                                                <DropDownItem onClick = { () => changeSelectedPaymentMethod('TRANSFER') } >
-                                                    <Text>
-                                                    Transfer
-                                                    </Text>
-                                                </DropDownItem>
-                                                <DropDownItem onClick = { () => changeSelectedPaymentMethod('CHEQUE') } > 
-                                                    <Text>
-                                                    Cheque
-                                                    </Text>
-                                                </DropDownItem>
-                                            </DropDownMenu>
-                                        </DropDown> */}
-                                            
-
-
 
                                         <FormControl className={classes.formControl}>
-                                            {/* <InputLabel id="demo-simple-select-label">Select Deposit</InputLabel> */}
+                                            
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
@@ -345,30 +279,18 @@ const DisplayInvoice: React.FC<BasePropertyProps> = (props) => {
                                                 onChange={(e)=> changeSelectedPaymentMethod(e.target.value)}
                                             >
 
-
-  
                                                 <MenuItem value='CASH'> Cash </MenuItem>
                                                 <MenuItem value='NET30'> NET30 </MenuItem>
-                                                {/* <MenuItem value='TRANSFER'> Transfer </MenuItem>
-                                                <MenuItem value='CHEQUE'> Cheque </MenuItem> */}
-
-
-
-
 
                                             </Select>
                                         </FormControl>                                            
-                                            
-                                        
-                                        
-                                        
+                                                                                    
                                         </TableCell>
 
                                         <TableCell>
 
-
                                             <FormControl className={classes.formControl}>
-                                                {/* <InputLabel id="demo-simple-select-label">Select Deposit</InputLabel> */}
+                                                
                                                 <Select
                                                     labelId="demo-simple-select-label"
                                                     id="demo-simple-select"
@@ -377,32 +299,17 @@ const DisplayInvoice: React.FC<BasePropertyProps> = (props) => {
                                                     onChange={(e)=> changeSelectedPaymentStatus(e.target.value)}
                                                 >
 
-
-    
                                                     <MenuItem value='UNPAID'> Unpaid </MenuItem>
                                                     <MenuItem value='PAID'> Paid </MenuItem>
 
-
-
-
-
-
                                                 </Select>
                                             </FormControl>                                            
-                                            
-                                        
-                                        
-                                        
+        
                                         </TableCell>
-
-
-
 
                                     <TableCell > <div>&nbsp;</div> <h1> ${props.record.params.replyTotalPrice}</h1> <div>&nbsp;</div>  </TableCell>
 
-
                                 </TableRow>
-
 
                             </TableBody>
                         </Table>

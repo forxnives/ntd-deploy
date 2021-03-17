@@ -1,12 +1,8 @@
-const { paramsToFormData } = require('admin-bro');
 const express = require('express');
-const { queryDeposits, bulkCreateDeposit, bulkAddToDeposit, depositDocsZip } = require('./depositController');
-
-
+const { depositDocsZip } = require('./depositController');
 const router = express.Router();
 
 router.route('/')
-
 
   .put(
     async (req, res) => {
@@ -20,8 +16,7 @@ router.route('/')
           console.log(err);
           res.status(500).json({ message: 'internal server error' });
         }
-    
-      }
+    }
   )
 
   router.route('/:depositId')
@@ -32,7 +27,6 @@ router.route('/')
         try {
             
             const file = `./uploads/deposits/${req.params.depositId}/deposit.zip`
-
             res.download(file); 
 
         } catch (err) {
